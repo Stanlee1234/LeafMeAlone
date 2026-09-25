@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://y4cy5jrkvdx7"]
 
-[ext_resource type="PackedScene" uid="uid://7sjkos3qks3p" path="res://MainGame/leaf_spawner.tscn" id="1_k8vwl"]
 [ext_resource type="PackedScene" uid="uid://ct2fbiysqlgnu" path="res://MainGame/player.tscn" id="1_sautc"]
+[ext_resource type="Script" uid="uid://fxnny4uw52qb" path="res://MainGame/leaf_spawner.gd" id="2_6e1mp"]
+[ext_resource type="PackedScene" uid="uid://wvr1ht8swq36" path="res://MainGame/leaf.tscn" id="3_cht7c"]
 
 [node name="Game" type="Node2D" unique_id=116674212]
 
-[node name="LeafSpawner" parent="." unique_id=1921155000 instance=ExtResource("1_k8vwl")]
-
 [node name="Player" parent="." unique_id=2075003599 instance=ExtResource("1_sautc")]
-position = Vector2(514, 536)
+position = Vector2(511.99997, 0)
 
 [node name="Timer" type="Timer" parent="." unique_id=1447366100]
+
+[node name="LeafSpawner" type="Node2D" parent="." unique_id=718692569]
+script = ExtResource("2_6e1mp")
+leaf_scene = ExtResource("3_cht7c")

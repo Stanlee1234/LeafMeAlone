@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://wvr1ht8swq36"]
+
+[ext_resource type="Texture2D" uid="uid://wy2xx7slwt6n" path="res://icon2.svg" id="1_7u51v"]
+[ext_resource type="Script" uid="uid://chhusg07vqtoo" path="res://MainGame/leaf.gd" id="1_cxrl5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxrl5"]
+atlas = ExtResource("1_7u51v")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cyaq0"]
+atlas = ExtResource("1_7u51v")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctnk4"]
+atlas = ExtResource("1_7u51v")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ays73"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxrl5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cyaq0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ctnk4")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7u51v"]
+size = Vector2(12, 10)
+
+[node name="Leaf" type="Area2D" unique_id=355471267 groups=["leaves"]]
+script = ExtResource("1_cxrl5")
+fall_speed = 100.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1405395069]
+sprite_frames = SubResource("SpriteFrames_ays73")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2121442121]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_7u51v")
