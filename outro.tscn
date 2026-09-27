@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://dv7vetl2i7i7p"]
+
+[ext_resource type="FontFile" uid="uid://34f1scviimhn" path="res://Assets/Daydream DEMO.otf" id="1_d2ofq"]
+[ext_resource type="Texture2D" uid="uid://drbobvnykusq0" path="res://Assets/autumnTreeTrunk.png" id="1_hiixy"]
+[ext_resource type="Texture2D" uid="uid://b57kmyjhdeoyj" path="res://Assets/mapleFlower.png" id="2_njae7"]
+[ext_resource type="Texture2D" uid="uid://dconaifi8mu7k" path="res://Assets/autumnTreeTop.png" id="2_yvxpr"]
+
+[node name="Outro" type="Control" unique_id=380590553]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2016407903]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1.540184e-06, 0.8225228, 0.8266546, 1)
+
+[node name="AutumnTreeTrunk" type="Sprite2D" parent="." unique_id=1865164846]
+position = Vector2(401, 300)
+texture = ExtResource("1_hiixy")
+
+[node name="AutumnTreeTop" type="Sprite2D" parent="." unique_id=651145635]
+position = Vector2(401, 300)
+texture = ExtResource("2_yvxpr")
+
+[node name="Label" type="Label" parent="." unique_id=1100924408]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -221.0
+offset_bottom = -195.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_d2ofq")
+theme_override_font_sizes/font_size = 32
+text = "Thanks for playing!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="." unique_id=289465890]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -97.0
+offset_right = -1.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_d2ofq")
+text = "Code, Art, Sounds by IceVeryChill / Me
+
+Music by yoshiyuki tatsuya
+
+Made in 3 days for Fall Jam 2026!"
+horizontal_alignment = 1
+
+[node name="MapleFlower" type="Sprite2D" parent="." unique_id=1898234932]
+position = Vector2(65.00001, 505.00003)
+rotation = -0.3647738
+scale = Vector2(7.285714, 7.285714)
+texture = ExtResource("2_njae7")

@@ -50,10 +50,10 @@ anchors_preset = 0
 custom_minimum_size = Vector2(0, 119)
 custom_maximum_size = Vector2(-1, 119)
 layout_mode = 0
-offset_left = 50.0
-offset_top = -57.0
-offset_right = 256.0
-offset_bottom = 62.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 206.0
+offset_bottom = 119.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1a40k")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TooltipCard/PanelContainer" unique_id=1668966811]

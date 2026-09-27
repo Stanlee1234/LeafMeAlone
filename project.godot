@@ -11,12 +11,13 @@ config_version=5
 [application]
 
 config/name="Leaf Me Alone"
-run/main_scene="uid://y4cy5jrkvdx7"
+run/main_scene="uid://bvmhi4fwlsyy7"
 config/features=PackedStringArray("4.8", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
+Leaf="*uid://chhusg07vqtoo"
 LeafSpawner="*uid://fxnny4uw52qb"
 Global="*uid://cydebyylkvcnx"
 Music="*uid://sr8re60xch70"

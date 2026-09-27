@@ -3,7 +3,6 @@ extends Node2D
 
 @onready var camera_2d: Camera2D = $Camera2D
 
-# Load the sound (adjust path if using .mp3 instead of .wav)
 @export var pop_sound: AudioStream = preload("res://Assets/pop_3.wav")
 var sfx_player: AudioStreamPlayer
 
@@ -15,7 +14,6 @@ var is_game_active: bool = false
 var tween: Tween
 
 func _ready() -> void:
-	# Create an AudioStreamPlayer node dynamically
 	sfx_player = AudioStreamPlayer.new()
 	sfx_player.stream = pop_sound
 	add_child(sfx_player)
@@ -37,7 +35,6 @@ func start_ready_sequence() -> void:
 	label.modulate.a = 1.0
 	label.text = "READY?"
 	
-	# Play pop for READY?
 	play_pop(1.0)
 	
 	label.scale = Vector2(0.5, 0.5)
@@ -48,7 +45,6 @@ func start_ready_sequence() -> void:
 
 	label.text = "GO!"
 	
-	# Play pop for GO! (pitch shifted to 1.3 for a higher celebratory tone)
 	play_pop(1.3)
 	
 	label.scale = Vector2(0.6, 0.6)
@@ -63,15 +59,21 @@ func start_ready_sequence() -> void:
 	await fade_tween.finished
 	label.hide()
 
+func end_round() -> void:
+	if not Global.is_underground and is_game_active:
+		play_pop(0.9)
+		switch_view()
+
 func switch_view() -> void:
 	if tween and tween.is_running():
 		tween.kill()
 
-	# Sync state to Global
-	Global.is_underground = !Global.is_underground
+	Global.notify_view_changed(!Global.is_underground)
 
 	if Global.is_underground:
 		is_game_active = false
+		Global.coffee_active = false
+		Global.coffee_ended.emit()
 		get_tree().call_group("leaves", "queue_free")
 
 	var target_y = SCREEN_HEIGHT if Global.is_underground else 0.0

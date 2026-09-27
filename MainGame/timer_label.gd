@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 
 func update_display() -> void:
 	var total_seconds: int = int(time_left)
-	var minutes: int = total_seconds / 60
+	var minutes: int = int(total_seconds / 60.0)
 	var seconds: int = total_seconds % 60
 	var milliseconds: int = int(fposmod(time_left, 1.0) * 1000.0)
 	text = "%02d:%02d.%03d" % [minutes, seconds, milliseconds]
@@ -36,7 +36,6 @@ func update_display() -> void:
 
 func on_time_expired() -> void:
 	%SceneController.switch_view()
-	# Trigger game over or prestige round here
 
 func reset_time() -> void:
 	time_left = Global.stats["round_duration"]

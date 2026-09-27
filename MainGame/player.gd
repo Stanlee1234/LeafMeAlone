@@ -17,13 +17,54 @@ func _ready() -> void:
 	hitbox_offset = hitbox.position
 	collide_offset = collide.position
 	
-	# Load initial speed stat from Global
 	speed = Global.stats.get("move_speed", 150.0)
 	
-	# Listen for stat upgrades bought while game is running
 	Global.stat_updated.connect(_on_stat_updated)
+	Global.timer_reset.connect(reset_position)
+	reset_position()
+
+func reset_position() -> void:
+	var screen_size: Vector2 = get_viewport_rect().size
+	var mid_x: float = screen_size.x / 2.0 if screen_size.x > 0.0 else 400.0
+	position.x = mid_x
+	velocity = Vector2.ZERO
+	last_direction = Vector2.RIGHT
+	if animated_sprite_2d:
+		animated_sprite_2d.scale.x = original_scale_x
+		animated_sprite_2d.play("idle")
+	update_collision_position()
+	align_character()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_R:
+			if Global.activate_coffee():
+				var sfx = AudioStreamPlayer.new()
+				sfx.stream = preload("res://Assets/coffee_boost.wav")
+				add_child(sfx)
+				sfx.finished.connect(sfx.queue_free)
+				sfx.play()
 
 func _physics_process(_delta: float) -> void:
+	if Global.is_underground:
+		velocity = Vector2.ZERO
+		return
+
+	var controller = get_tree().root.find_child("SceneController", true, false)
+	if controller and not controller.is_game_active:
+		velocity.x = 0.0
+		animated_sprite_2d.play("idle")
+		align_character()
+		move_and_slide()
+		return
+
+	var current_speed: float = speed * (Global.COFFEE_SPEED_MULT if Global.coffee_active else 1.0)
+
+	if Global.coffee_active:
+		animated_sprite_2d.modulate = Color(1.35, 1.15, 0.85, 1.0)
+	else:
+		animated_sprite_2d.modulate = Color.WHITE
+
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction != 0:
 		if direction < 0:
@@ -34,10 +75,10 @@ func _physics_process(_delta: float) -> void:
 			last_direction = Vector2.RIGHT
 
 		animated_sprite_2d.play("walk")
-		velocity.x = direction * speed
+		velocity.x = direction * current_speed
 	else:
 		animated_sprite_2d.play("idle")
-		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.x = move_toward(velocity.x, 0, current_speed)
 		last_direction = Vector2.ZERO
 		
 	update_collision_position()
@@ -66,7 +107,11 @@ func align_character() -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("leaves"):
-		var payout: int = int(round(Global.stats.get("leaf_value", 1.0)))
+		var base_val: float = Global.stats.get("leaf_value", 1.0)
+		var mult: float = Global.COFFEE_VALUE_MULT if Global.coffee_active else 1.0
+		if "is_gold" in area and area.is_gold:
+			mult *= Global.stats.get("gold_leaf_mult", 2.0)
+		var payout: int = int(round(base_val * mult))
 		Global.add_leaves(payout)
 		var bonus_time: float = Global.stats.get("leaf_time", 0.0)
 		if bonus_time > 0.0:

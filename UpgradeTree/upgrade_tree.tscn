@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://drfxqhts12kvy" path="res://UpgradeTree/upgrade_tree.gd" id="1_p6pga"]
 [ext_resource type="Texture2D" uid="uid://n6jb3j7r8qu7" path="res://Assets/Icons/speed1.png" id="3_hgpyu"]
 [ext_resource type="Texture2D" uid="uid://chlhxmf2kua1w" path="res://Assets/Icons/mapleFlower1.png" id="3_ihisa"]
+[ext_resource type="Texture2D" uid="uid://dk0fwigtpni7j" path="res://Assets/star.png" id="4_4iw86"]
 [ext_resource type="Texture2D" uid="uid://b4mxl4o628jju" path="res://Assets/Icons/speed2.png" id="4_jcks3"]
 [ext_resource type="Texture2D" uid="uid://dktxw4na7sgyj" path="res://Assets/Icons/mapleFlower2.png" id="4_lwf2u"]
 [ext_resource type="Texture2D" uid="uid://duuuq7blrm2ue" path="res://Assets/Icons/mapleFlower3.png" id="5_k3vjo"]
@@ -80,14 +81,27 @@ z_index = -1
 position = Vector2(400, 0)
 texture = ExtResource("1_4ou87")
 
+[node name="FinalUpgrade" parent="." unique_id=971124149 instance=ExtResource("1_312e0")]
+position = Vector2(400, 336)
+scale = Vector2(0.7, 0.7)
+sprite_image = ExtResource("4_4iw86")
+upgrade_name = "Final Upgrade"
+description = "The autumn tree is in full bloom. Complete your journey!"
+base_cost = 500
+hold_duration = 1.0
+is_final_upgrade = true
+target_scene = "res://outro.tscn"
+unlock_mode = 1
+
 [node name="BaseUpgrade" parent="." unique_id=576152010 node_paths=PackedStringArray("connected_upgrades") instance=ExtResource("1_312e0")]
 position = Vector2(443, 48)
 scale = Vector2(0.7, 0.7)
-upgrade_name = "Speed"
-description = "Increases Movement Speed by 2"
+sprite_image = ExtResource("4_4iw86")
+upgrade_name = "Base Upgrade"
+description = "Wake up the roots to unlock cool new upgrades!"
 base_cost = 2
 hold_duration = 0.5
-stat_step_per_level = 2.0
+stat_step_per_level = 10.0
 stat_suffix = " px/s"
 unlocked_by_default = true
 connected_upgrades = [NodePath("Speed/Speed1"), NodePath("LeafAmount/LeafAmount1"), NodePath("LeafCollect/LeafCollect1"), NodePath("Time/Time1"), NodePath("LeafValue/LeafValue1")]
@@ -100,9 +114,10 @@ scale = Vector2(0.99999994, 0.99999994)
 position = Vector2(235.42859, 34)
 sprite_image = ExtResource("3_hgpyu")
 upgrade_name = "Speed I"
-description = "Increases your movement speed!"
-max_level = 2
-base_cost = 5
+description = "Gotta go fast! Run a little quicker."
+max_level = 3
+base_cost = 8
+cost_multiplier = 1.6
 hold_duration = 0.5
 stat_step_per_level = 15.0
 stat_suffix = " px/s"
@@ -112,8 +127,10 @@ connected_upgrades = [NodePath("../Speed2")]
 position = Vector2(149.71431, 95.42858)
 sprite_image = ExtResource("4_jcks3")
 upgrade_name = "Speed II"
-max_level = 2
-base_cost = 15
+description = "Zoom zoom! Speedy boots for catching leaves."
+max_level = 3
+base_cost = 25
+cost_multiplier = 1.7
 hold_duration = 0.5
 stat_step_per_level = 20.0
 stat_suffix = " px/s"
@@ -124,8 +141,10 @@ unlock_mode = 1
 position = Vector2(45.42855, 136.85713)
 sprite_image = ExtResource("5_y6opr")
 upgrade_name = "Speed III"
-max_level = 2
-base_cost = 30
+description = "Super fast! Zip across the grass in a flash."
+max_level = 3
+base_cost = 70
+cost_multiplier = 1.8
 hold_duration = 0.5
 stat_step_per_level = 25.0
 stat_suffix = " px/s"
@@ -135,10 +154,12 @@ connected_upgrades = [NodePath("../Speed4")]
 position = Vector2(-103.14287, 139.71428)
 sprite_image = ExtResource("6_ckn0l")
 upgrade_name = "Speed IV"
-max_level = 2
-base_cost = 60
+description = "Maximum zoomies! No leaf can escape you now."
+max_level = 3
+base_cost = 180
+cost_multiplier = 2.0
 hold_duration = 0.5
-stat_step_per_level = 30.0
+stat_step_per_level = 35.0
 stat_suffix = " px/s"
 
 [node name="LeafAmount" type="Node2D" parent="BaseUpgrade" unique_id=1796709508]
@@ -149,34 +170,40 @@ scale = Vector2(0.99999994, 0.99999994)
 position = Vector2(343.99997, 132.57143)
 sprite_image = ExtResource("3_ihisa")
 upgrade_name = "Leaf Amount I"
-description = "Make the tree drop a few extra leaves!"
-max_level = 2
+description = "Shake the tree! Drops leaves a bit faster."
+max_level = 3
+base_cost = 12
+cost_multiplier = 1.6
 hold_duration = 0.5
 stat_id = "leaf_amount"
-stat_step_per_level = -0.05
+stat_step_per_level = -0.06
 stat_suffix = "s"
 connected_upgrades = [NodePath("Sway"), NodePath("../LeafAmount2")]
 
-[node name="Sway" parent="BaseUpgrade/LeafAmount/LeafAmount1" unique_id=1730607196 instance=ExtResource("1_312e0")]
+[node name="Sway" parent="BaseUpgrade/LeafAmount/LeafAmount1" unique_id=1730607196 node_paths=PackedStringArray("connected_upgrades") instance=ExtResource("1_312e0")]
 position = Vector2(29.999992, 151.42857)
 sprite_image = ExtResource("8_vvdc4")
-upgrade_name = "Leaf Sway"
-description = "Increases leaf sway width!"
-max_level = 2
+upgrade_name = "Sway"
+description = "Calms the silly wind so leaves fall straight down!"
+max_level = 3
+base_cost = 20
 hold_duration = 0.5
 stat_id = "leaf_sway"
-stat_step_per_level = 10.0
+stat_step_per_level = -10.0
 stat_suffix = " px"
+connected_upgrades = [NodePath("../../../../FinalUpgrade")]
 
 [node name="LeafAmount2" parent="BaseUpgrade/LeafAmount" unique_id=1272713491 node_paths=PackedStringArray("connected_upgrades") instance=ExtResource("1_312e0")]
 position = Vector2(280, 224)
 sprite_image = ExtResource("4_lwf2u")
 upgrade_name = "Leaf Amount II"
-description = "Adds more leaves to the stage!"
-max_level = 2
+description = "Shake harder! Even more leaves falling down."
+max_level = 3
+base_cost = 45
+cost_multiplier = 1.7
 hold_duration = 0.5
 stat_id = "leaf_amount"
-stat_step_per_level = -0.05
+stat_step_per_level = -0.07
 stat_suffix = "s"
 connected_upgrades = [NodePath("../LeafAmount3")]
 
@@ -184,11 +211,13 @@ connected_upgrades = [NodePath("../LeafAmount3")]
 position = Vector2(169.71428, 321.14288)
 sprite_image = ExtResource("5_k3vjo")
 upgrade_name = "Leaf Amount III"
-description = "Greatly increases the amount of leaves spawned on the stage!"
-max_level = 2
+description = "Leaf storm! Tons of leaves tumbling down."
+max_level = 3
+base_cost = 110
+cost_multiplier = 1.8
 hold_duration = 0.5
 stat_id = "leaf_amount"
-stat_step_per_level = -0.05
+stat_step_per_level = -0.08
 stat_suffix = "s"
 connected_upgrades = [NodePath("../LeafValue4"), NodePath("GoldLeaf1")]
 
@@ -196,58 +225,77 @@ connected_upgrades = [NodePath("../LeafValue4"), NodePath("GoldLeaf1")]
 position = Vector2(21.42862, 115.714264)
 sprite_image = ExtResource("10_y8okm")
 upgrade_name = "Gold Leaf I"
-description = "Increases the Chance for gold leafs to spawn (2x value)"
+description = "Ooh shiny! Gives a chance for golden leaves to drop."
 max_level = 2
+base_cost = 90
+cost_multiplier = 1.8
 hold_duration = 0.5
-stat_id = "leaf_value"
-stat_step_per_level = 2.0
+stat_id = "gold_leaf_chance"
+stat_step_per_level = 0.1
+stat_suffix = "%"
 connected_upgrades = [NodePath("../GoldLeaf2"), NodePath("../GoldLeaf3")]
 
-[node name="GoldLeaf2" parent="BaseUpgrade/LeafAmount/LeafAmount3" unique_id=588898623 instance=ExtResource("1_312e0")]
+[node name="GoldLeaf2" parent="BaseUpgrade/LeafAmount/LeafAmount3" unique_id=588898623 node_paths=PackedStringArray("connected_upgrades") instance=ExtResource("1_312e0")]
 position = Vector2(92.85715, 228.57138)
 sprite_image = ExtResource("11_hq78p")
 upgrade_name = "Gold Leaf II"
+description = "More shinies! Golden leaves drop way more often."
 max_level = 2
+base_cost = 200
+cost_multiplier = 2.0
 hold_duration = 0.5
-stat_id = "leaf_value"
-stat_step_per_level = 2.0
+stat_id = "gold_leaf_chance"
+stat_step_per_level = 0.15
+stat_suffix = "%"
+connected_upgrades = [NodePath("../../../../FinalUpgrade")]
 
 [node name="GoldLeaf3" parent="BaseUpgrade/LeafAmount/LeafAmount3" unique_id=184876561 instance=ExtResource("1_312e0")]
 position = Vector2(-9.9999695, 262.8571)
 sprite_image = ExtResource("12_n3hei")
 upgrade_name = "Gold Leaf III"
+description = "Super shiny! Golden leaves give extra big points!"
 max_level = 2
+base_cost = 450
+cost_multiplier = 2.2
 hold_duration = 0.5
-stat_id = "leaf_value"
-stat_step_per_level = 3.0
+stat_id = "gold_leaf_mult"
+stat_step_per_level = 1.0
+stat_suffix = "x"
 
 [node name="LeafValue4" parent="BaseUpgrade/LeafAmount" unique_id=718540877 node_paths=PackedStringArray("connected_upgrades") instance=ExtResource("1_312e0")]
 position = Vector2(64, 339.7143)
 sprite_image = ExtResource("13_300yb")
 upgrade_name = "Leaf Value IV"
-max_level = 2
+description = "Juicy leaves! Every leaf caught gives extra points."
+max_level = 3
+base_cost = 140
+cost_multiplier = 1.8
 hold_duration = 0.5
 stat_id = "leaf_value"
-stat_step_per_level = 2.0
+stat_step_per_level = 3.0
 connected_upgrades = [NodePath("../LeafValue5"), NodePath("Caffinated")]
 
 [node name="Caffinated" parent="BaseUpgrade/LeafAmount/LeafValue4" unique_id=165978347 instance=ExtResource("1_312e0")]
 position = Vector2(-157.14285, 68.57144)
 sprite_image = ExtResource("15_kcyd2")
-upgrade_name = "Caffeinated"
-description = "Adds a Coffee! (Press R to use during game)"
+upgrade_name = "Caffinated"
+description = "Coffee time! Press [R] in-game to zoom and get 2x points!"
+base_cost = 120
 hold_duration = 0.5
-stat_step_per_level = 25.0
-stat_suffix = " px/s"
+stat_id = "has_coffee"
+stat_step_per_level = 1.0
 
-[node name="LeafValue5" parent="BaseUpgrade/LeafAmount" unique_id=971124149 instance=ExtResource("1_312e0")]
+[node name="LeafValue5" parent="BaseUpgrade/LeafAmount" unique_id=1527153165 instance=ExtResource("1_312e0")]
 position = Vector2(26.85714, 493.99997)
 sprite_image = ExtResource("14_vvdc4")
 upgrade_name = "Leaf Value V"
-max_level = 2
+description = "Leaf jackpot! Huge points for every leaf."
+max_level = 3
+base_cost = 320
+cost_multiplier = 2.0
 hold_duration = 0.5
 stat_id = "leaf_value"
-stat_step_per_level = 3.0
+stat_step_per_level = 4.0
 
 [node name="Time" type="Node2D" parent="BaseUpgrade" unique_id=1604702217]
 position = Vector2(-17.571411, 3.5714264)
@@ -256,8 +304,11 @@ scale = Vector2(0.99999994, 0.99999994)
 [node name="Time1" parent="BaseUpgrade/Time" unique_id=236327298 node_paths=PackedStringArray("connected_upgrades") instance=ExtResource("1_312e0")]
 position = Vector2(184.71423, 120.714294)
 sprite_image = ExtResource("15_a4j6s")
-upgrade_name = "Round Time I"
-max_level = 2
+upgrade_name = "Time I"
+description = "A few extra seconds on the clock. Chill out!"
+max_level = 3
+base_cost = 15
+cost_multiplier = 1.6
 hold_duration = 0.5
 stat_id = "round_duration"
 stat_step_per_level = 2.0
@@ -266,12 +317,16 @@ connected_upgrades = [NodePath("../Time2")]
 
 [node name="Time2" parent="BaseUpgrade/Time" unique_id=1651680799 node_paths=PackedStringArray("connected_upgrades") instance=ExtResource("1_312e0")]
 position = Vector2(287.5714, 210.71428)
+card_side = -1
 sprite_image = ExtResource("16_h0qpg")
-upgrade_name = "Round Time II"
-max_level = 2
+upgrade_name = "Time II"
+description = "More seconds! No need to rush."
+max_level = 3
+base_cost = 40
+cost_multiplier = 1.7
 hold_duration = 0.5
 stat_id = "round_duration"
-stat_step_per_level = 2.0
+stat_step_per_level = 2.5
 stat_suffix = "s"
 connected_upgrades = [NodePath("../Time3"), NodePath("../Time4")]
 
@@ -279,8 +334,11 @@ connected_upgrades = [NodePath("../Time3"), NodePath("../Time4")]
 position = Vector2(446.14282, 286.4286)
 card_side = -1
 sprite_image = ExtResource("17_mhkc6")
-upgrade_name = "Round Time III"
-max_level = 2
+upgrade_name = "Time III"
+description = "Even more time! Chilling and catching leaves."
+max_level = 3
+base_cost = 90
+cost_multiplier = 1.8
 hold_duration = 0.5
 stat_id = "round_duration"
 stat_step_per_level = 3.0
@@ -290,11 +348,14 @@ stat_suffix = "s"
 position = Vector2(336.14285, 365)
 card_side = -1
 sprite_image = ExtResource("18_300yb")
-upgrade_name = "Round Time IV"
-max_level = 2
+upgrade_name = "Time IV"
+description = "Tons of extra time! Catch leaves all day long."
+max_level = 3
+base_cost = 220
+cost_multiplier = 2.0
 hold_duration = 0.5
 stat_id = "round_duration"
-stat_step_per_level = 3.0
+stat_step_per_level = 4.0
 stat_suffix = "s"
 
 [node name="LeafCollect" type="Node2D" parent="BaseUpgrade" unique_id=1915910395]
@@ -304,20 +365,25 @@ scale = Vector2(0.99999994, 0.99999994)
 [node name="LeafCollect1" parent="BaseUpgrade/LeafCollect" unique_id=33436416 node_paths=PackedStringArray("connected_upgrades") instance=ExtResource("1_312e0")]
 position = Vector2(466.85715, 198.2857)
 sprite_image = ExtResource("12_u8wst")
-upgrade_name = "Leaf Collector I"
-description = "Gain a little time back each time you pick up a leaf!"
-max_level = 2
+upgrade_name = "Leaf Collect I"
+description = "Catch a leaf, get a tiny bit of time back!"
+max_level = 3
+base_cost = 20
+cost_multiplier = 1.6
 hold_duration = 0.5
 stat_id = "leaf_time"
-stat_step_per_level = 0.1
+stat_step_per_level = 0.08
 stat_suffix = "s"
 connected_upgrades = [NodePath("../LeafCollect2")]
 
 [node name="LeafCollect2" parent="BaseUpgrade/LeafCollect" unique_id=1413824378 node_paths=PackedStringArray("connected_upgrades") instance=ExtResource("1_312e0")]
 position = Vector2(526.8571, 349.7143)
 sprite_image = ExtResource("13_ys0x3")
-upgrade_name = "Leaf Collector II"
-max_level = 2
+upgrade_name = "Leaf Collect II"
+description = "Catching leaves adds more seconds to the clock."
+max_level = 3
+base_cost = 55
+cost_multiplier = 1.7
 hold_duration = 0.5
 stat_id = "leaf_time"
 stat_step_per_level = 0.1
@@ -328,23 +394,31 @@ connected_upgrades = [NodePath("../LeafCollect4"), NodePath("../LeafCollect3")]
 position = Vector2(631.1428, 508.28574)
 card_side = -1
 sprite_image = ExtResource("14_kxmrm")
-upgrade_name = "Leaf Collector III"
-max_level = 2
+upgrade_name = "Leaf Collect III"
+description = "Big time bonus for every leaf caught!"
+max_level = 3
+base_cost = 130
+cost_multiplier = 1.8
+hold_duration = 0.5
+stat_id = "leaf_time"
+stat_step_per_level = 0.12
+stat_suffix = "s"
+
+[node name="LeafCollect4" parent="BaseUpgrade/LeafCollect" unique_id=581672335 node_paths=PackedStringArray("connected_upgrades") instance=ExtResource("1_312e0")]
+position = Vector2(525.42847, 532.5712)
+scale = Vector2(0.99999964, 0.99999964)
+card_side = -1
+sprite_image = ExtResource("15_y8okm")
+upgrade_name = "Leaf Collect IV"
+description = "Leaf combo! Add lots of time with each leaf."
+max_level = 3
+base_cost = 300
+cost_multiplier = 2.0
 hold_duration = 0.5
 stat_id = "leaf_time"
 stat_step_per_level = 0.15
 stat_suffix = "s"
-
-[node name="LeafCollect4" parent="BaseUpgrade/LeafCollect" unique_id=581672335 instance=ExtResource("1_312e0")]
-position = Vector2(525.42847, 532.5712)
-scale = Vector2(0.99999964, 0.99999964)
-sprite_image = ExtResource("15_y8okm")
-upgrade_name = "Leaf Collector IV"
-max_level = 2
-hold_duration = 0.5
-stat_id = "leaf_time"
-stat_step_per_level = 0.2
-stat_suffix = "s"
+connected_upgrades = [NodePath("../../../FinalUpgrade")]
 
 [node name="LeafValue" type="Node2D" parent="BaseUpgrade" unique_id=311932370]
 position = Vector2(-17.571411, 3.5714264)
@@ -355,8 +429,10 @@ position = Vector2(298.99997, 4.9999976)
 card_side = -1
 sprite_image = ExtResource("23_300yb")
 upgrade_name = "Leaf Value I"
-max_level = 2
-base_cost = 1
+description = "Leaves are worth more! Cha-ching."
+max_level = 3
+base_cost = 10
+cost_multiplier = 1.6
 hold_duration = 0.5
 stat_id = "leaf_value"
 stat_step_per_level = 1.0
@@ -367,22 +443,26 @@ position = Vector2(467.57138, 55)
 card_side = -1
 sprite_image = ExtResource("24_vvdc4")
 upgrade_name = "Leaf Value II"
-max_level = 2
-base_cost = 1
+description = "Even more points per leaf. Ka-ching!"
+max_level = 3
+base_cost = 35
+cost_multiplier = 1.7
 hold_duration = 0.5
 stat_id = "leaf_value"
-stat_step_per_level = 1.0
+stat_step_per_level = 2.0
 
 [node name="LeafValue3" parent="BaseUpgrade/LeafValue" unique_id=530328045 instance=ExtResource("1_312e0")]
 position = Vector2(416.14288, 136.42857)
 card_side = -1
 sprite_image = ExtResource("25_kcyd2")
 upgrade_name = "Leaf Value III"
-max_level = 2
-base_cost = 1
+description = "Leaves give big points! Watch your score jump!"
+max_level = 3
+base_cost = 95
+cost_multiplier = 1.8
 hold_duration = 0.5
 stat_id = "leaf_value"
-stat_step_per_level = 1.0
+stat_step_per_level = 3.0
 
 [node name="Button" type="Button" parent="." unique_id=286567970]
 offset_left = 707.0
