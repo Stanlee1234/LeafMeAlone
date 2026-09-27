@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://cmdetlrlaphwm"]
+
+[ext_resource type="Script" uid="uid://bnuklf6lv8spd" path="res://UpgradeTree/upgrade_node.gd" id="1_1a40k"]
+[ext_resource type="Texture2D" uid="uid://wy2xx7slwt6n" path="res://icon2.svg" id="1_4oq0e"]
+[ext_resource type="FontFile" uid="uid://34f1scviimhn" path="res://Assets/Daydream DEMO.otf" id="3_c3pww"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nav77"]
+size = Vector2(64, 64)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1a40k"]
+bg_color = Color(0.77254903, 0.54509807, 0.3254902, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.16862746, 0.16862746, 0.16862746, 0.85490197)
+shadow_size = 1
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c3pww"]
+bg_color = Color(0.7653052, 0.51531035, 0.46523547, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="UpgradeNode" type="Area2D" unique_id=971124149]
+script = ExtResource("1_1a40k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1052922042]
+shape = SubResource("RectangleShape2D_nav77")
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=493829017]
+texture = ExtResource("1_4oq0e")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=224298512]
+
+[node name="TooltipCard" type="Control" parent="." unique_id=923608767]
+visible = false
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="TooltipCard" unique_id=1579434643]
+custom_minimum_size = Vector2(0, 119)
+custom_maximum_size = Vector2(-1, 119)
+layout_mode = 0
+offset_left = 50.0
+offset_top = -57.0
+offset_right = 256.0
+offset_bottom = 62.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1a40k")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TooltipCard/PanelContainer" unique_id=1668966811]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="TooltipCard/PanelContainer/VBoxContainer" unique_id=444897607]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_c3pww")
+text = "Testing 0/1"
+horizontal_alignment = 1
+
+[node name="DescLabel" type="Label" parent="TooltipCard/PanelContainer/VBoxContainer" unique_id=1179955380]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "lorem ipsum dolor sit amet consectetuer adipiscing elit"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="StatLabel" type="Label" parent="TooltipCard/PanelContainer/VBoxContainer" unique_id=632819538]
+unique_name_in_owner = true
+layout_mode = 2
+text = "thing > thing"
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="TooltipCard/PanelContainer/VBoxContainer" unique_id=1275893443]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_c3pww")
+max_value = 1.0
+show_percentage = false
+
+[node name="CostLabel" type="Label" parent="TooltipCard/PanelContainer/VBoxContainer/ProgressBar" unique_id=1198230543]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -11.777779
+offset_right = 64.0
+offset_bottom = 11.777779
+grow_horizontal = 2
+grow_vertical = 2
+text = "Cost"
+horizontal_alignment = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

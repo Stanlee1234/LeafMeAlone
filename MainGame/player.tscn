@@ -1,39 +1,76 @@
 [gd_scene format=3 uid="uid://ct2fbiysqlgnu"]
 
 [ext_resource type="Script" uid="uid://6uvv2ymsfcsw" path="res://MainGame/player.gd" id="1_vxqgd"]
-[ext_resource type="Texture2D" uid="uid://it7kxpssebcq" path="res://icon.svg" id="2_tp8ae"]
+[ext_resource type="Texture2D" uid="uid://b4e6xyqlx5vq2" path="res://Assets/LeafFarmer-Sheet.png" id="2_vxqgd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
-size = Vector2(125, 127)
+size = Vector2(15.714291, 37.142868)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vxqgd"]
+atlas = ExtResource("2_vxqgd")
+region = Rect2(0, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tp8ae"]
+atlas = ExtResource("2_vxqgd")
+region = Rect2(0, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x134d"]
+atlas = ExtResource("2_vxqgd")
+region = Rect2(32, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60bc1"]
+atlas = ExtResource("2_vxqgd")
+region = Rect2(64, 0, 32, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_atrex"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vxqgd")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tp8ae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x134d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60bc1")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 7.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vxqgd"]
-size = Vector2(67.14287, 20)
+size = Vector2(15.714287, 4.214285)
 
 [node name="Player" type="CharacterBody2D" unique_id=2075003599]
 scale = Vector2(0.7, 0.7)
 script = ExtResource("1_vxqgd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=684706747]
-position = Vector2(0.49999997, 0.49999997)
-scale = Vector2(0.99999994, 0.99999994)
+position = Vector2(-7.8571377, 0)
+scale = Vector2(0.9999996, 0.9999996)
 shape = SubResource("RectangleShape2D_cvnsp")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1100773518]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=24157519]
 scale = Vector2(0.99999994, 0.99999994)
-texture = ExtResource("2_tp8ae")
-
-[node name="ColorRect" type="ColorRect" parent="Sprite2D" unique_id=623256312]
-offset_left = 22.85714
-offset_right = 91.428566
-offset_bottom = 22.85714
-color = Color(0.83137256, 0.56078434, 0.14117648, 1)
+sprite_frames = SubResource("SpriteFrames_atrex")
+animation = &"walk"
+autoplay = "idle"
+frame_progress = 0.061694797
 
 [node name="Area2D" type="Area2D" parent="." unique_id=819669505]
-position = Vector2(22.85714, -9.5367415e-07)
+position = Vector2(6.999999, -3.857141)
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1402361099]
-position = Vector2(35.000008, 11.428574)
 shape = SubResource("RectangleShape2D_vxqgd")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

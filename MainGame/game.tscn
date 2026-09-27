@@ -1,16 +1,107 @@
 [gd_scene format=3 uid="uid://y4cy5jrkvdx7"]
 
+[ext_resource type="Script" uid="uid://bnv6aykaqjrtx" path="res://MainGame/scene_controller.gd" id="1_8q0bg"]
 [ext_resource type="PackedScene" uid="uid://ct2fbiysqlgnu" path="res://MainGame/player.tscn" id="1_sautc"]
 [ext_resource type="Script" uid="uid://fxnny4uw52qb" path="res://MainGame/leaf_spawner.gd" id="2_6e1mp"]
-[ext_resource type="PackedScene" uid="uid://wvr1ht8swq36" path="res://MainGame/leaf.tscn" id="3_cht7c"]
+[ext_resource type="PackedScene" uid="uid://y0rrt5mjfeay" path="res://hud.tscn" id="2_my4vm"]
+[ext_resource type="Texture2D" uid="uid://dconaifi8mu7k" path="res://Assets/autumnTreeTop.png" id="4_cht7c"]
+[ext_resource type="Texture2D" uid="uid://drbobvnykusq0" path="res://Assets/autumnTreeTrunk.png" id="5_wfbjd"]
+[ext_resource type="FontFile" uid="uid://34f1scviimhn" path="res://Assets/Daydream DEMO.otf" id="7_1f51a"]
+[ext_resource type="Script" uid="uid://3dvxohsqop3q" path="res://MainGame/timer_label.gd" id="7_ussfm"]
+[ext_resource type="PackedScene" uid="uid://bd7gw6m61erxv" path="res://UpgradeTree/upgrade_tree.tscn" id="9_qs2bn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ussfm"]
+size = Vector2(20, 602)
 
 [node name="Game" type="Node2D" unique_id=116674212]
 
-[node name="Player" parent="." unique_id=2075003599 instance=ExtResource("1_sautc")]
-position = Vector2(511.99997, 0)
+[node name="SceneController" type="Node2D" parent="." unique_id=958757168]
+unique_name_in_owner = true
+script = ExtResource("1_8q0bg")
 
-[node name="Timer" type="Timer" parent="." unique_id=1447366100]
+[node name="Camera2D" type="Camera2D" parent="SceneController" unique_id=375891792]
+offset = Vector2(400, 300)
 
-[node name="LeafSpawner" type="Node2D" parent="." unique_id=718692569]
+[node name="HUD" parent="SceneController/Camera2D" unique_id=1156519529 instance=ExtResource("2_my4vm")]
+z_index = 10
+
+[node name="TopView" type="Node2D" parent="." unique_id=1770861705]
+
+[node name="Tree" type="Node2D" parent="TopView" unique_id=455106476]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="TopView/Tree" unique_id=1532749625]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TopView/Tree/StaticBody2D" unique_id=351049174]
+position = Vector2(804, 296)
+shape = SubResource("RectangleShape2D_ussfm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopView/Tree/StaticBody2D" unique_id=1055874086]
+position = Vector2(-15, 299)
+shape = SubResource("RectangleShape2D_ussfm")
+
+[node name="ColorRect" type="ColorRect" parent="TopView/Tree" unique_id=1006948515]
+offset_right = 800.0
+offset_bottom = 600.0
+mouse_filter = 2
+color = Color(0.5540066, 0.99999994, 0.9998166, 1)
+
+[node name="AutumnTreeTop" type="Sprite2D" parent="TopView/Tree" unique_id=640326012]
+z_index = 3
+position = Vector2(400, 300)
+texture = ExtResource("4_cht7c")
+
+[node name="AutumnTreeTrunk" type="Sprite2D" parent="TopView/Tree" unique_id=584809704]
+position = Vector2(400, 300)
+texture = ExtResource("5_wfbjd")
+
+[node name="Player" parent="TopView" unique_id=2075003599 instance=ExtResource("1_sautc")]
+z_index = 10
+position = Vector2(432, 536)
+scale = Vector2(3, 3)
+
+[node name="LeafSpawner" type="Node2D" parent="TopView" unique_id=718692569]
+z_index = 1
 script = ExtResource("2_6e1mp")
-leaf_scene = ExtResource("3_cht7c")
+
+[node name="HUD" type="CanvasLayer" parent="TopView" unique_id=1613040367]
+follow_viewport_enabled = true
+
+[node name="TimerLabel" type="Label" parent="TopView/HUD" unique_id=1907190734]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -72.5
+offset_right = 72.5
+offset_bottom = 46.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 33
+text = "xx:xx.xxx"
+script = ExtResource("7_ussfm")
+
+[node name="CountdownLabel" type="Label" parent="TopView/HUD" unique_id=168683402]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_right = 84.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("7_1f51a")
+text = "Ready?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeTree" parent="." unique_id=525492488 instance=ExtResource("9_qs2bn")]
+position = Vector2(0, 598)
+
+[node name="ColorRect" type="ColorRect" parent="UpgradeTree" unique_id=775941679]
+z_index = -10
+offset_top = -1.0
+offset_right = 800.0
+offset_bottom = 618.0
+mouse_filter = 2
+color = Color(0.6666667, 0.43137255, 0.23921569, 1)
