@@ -10,12 +10,10 @@ const JUMP_VELOCITY = -400.0
 var speed: float = 150.0
 var score = 0
 var hitbox_offset: Vector2
-var collide_offset: Vector2
 var last_direction: Vector2 = Vector2.RIGHT
 
 func _ready() -> void:
 	hitbox_offset = hitbox.position
-	collide_offset = collide.position
 	
 	speed = Global.stats.get("move_speed", 150.0)
 	
@@ -91,7 +89,6 @@ func update_collision_position() -> void:
 	
 	var dir_sign := signf(last_direction.x)
 	hitbox.position = Vector2(hitbox_offset.x * dir_sign, hitbox_offset.y)
-	collide.position = Vector2(collide_offset.x * dir_sign, collide_offset.y)
 
 func align_character() -> void:
 	var screen_size : Vector2 = get_viewport_rect().size

@@ -55,7 +55,7 @@ scale = Vector2(0.7, 0.7)
 script = ExtResource("1_vxqgd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=684706747]
-position = Vector2(-7.8571377, 0)
+position = Vector2(0, 0)
 scale = Vector2(0.9999996, 0.9999996)
 shape = SubResource("RectangleShape2D_cvnsp")
 

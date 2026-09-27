@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bnuklf6lv8spd" path="res://UpgradeTree/upgrade_node.gd" id="1_1a40k"]
 [ext_resource type="Texture2D" uid="uid://wy2xx7slwt6n" path="res://icon2.svg" id="1_4oq0e"]
 [ext_resource type="FontFile" uid="uid://34f1scviimhn" path="res://Assets/Daydream DEMO.otf" id="3_c3pww"]
+[ext_resource type="FontFile" uid="uid://c1y5qcut6goma" path="res://Assets/ViewVacationFunArt-KVXaW.otf" id="4_p288t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nav77"]
 size = Vector2(64, 64)
@@ -50,8 +51,6 @@ anchors_preset = 0
 custom_minimum_size = Vector2(0, 119)
 custom_maximum_size = Vector2(-1, 119)
 layout_mode = 0
-offset_left = 0.0
-offset_top = 0.0
 offset_right = 206.0
 offset_bottom = 119.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1a40k")
@@ -70,7 +69,7 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
+theme_override_fonts/font = ExtResource("4_p288t")
 text = "lorem ipsum dolor sit amet consectetuer adipiscing elit"
 horizontal_alignment = 1
 autowrap_mode = 2
@@ -78,6 +77,8 @@ autowrap_mode = 2
 [node name="StatLabel" type="Label" parent="TooltipCard/PanelContainer/VBoxContainer" unique_id=632819538]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_p288t")
+theme_override_font_sizes/font_size = 18
 text = "thing > thing"
 horizontal_alignment = 1
 
@@ -102,6 +103,8 @@ offset_right = 64.0
 offset_bottom = 11.777779
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_p288t")
+theme_override_font_sizes/font_size = 19
 text = "Cost"
 horizontal_alignment = 1
 
